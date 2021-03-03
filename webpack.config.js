@@ -38,7 +38,7 @@ module.exports = (env) => {
 				__REACT_DEVTOOLS_GLOBAL_HOOK__: '({ isDisabled: true })',
 			}),
 			new MiniCssExtractPlugin({
-				filename: './css/[name].css',
+				filename: './bundle/css/[name].css',
 			}),
 		],
 		optimization: {
