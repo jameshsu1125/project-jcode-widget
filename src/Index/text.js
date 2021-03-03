@@ -4,23 +4,42 @@ import './text.scss';
 export default class text extends React.Component {
 	constructor(props) {
 		super(props);
-		const root = this;
-		//script
 	}
 
-	componentDidMount() {
-		//script
+	all() {
+		this.props.sync('all');
 	}
 
-	componentDidUpdate() {
-		//script
+	nor() {
+		this.props.sync('nor');
 	}
 
-	componentWillUnmount() {
-		//script
+	cen() {
+		this.props.sync('cen');
+	}
+
+	sou() {
+		this.props.sync('sou');
+	}
+
+	est() {
+		this.props.sync('est');
+	}
+
+	copy() {
+		this.props.copy();
 	}
 
 	render() {
-		return <div id='text'></div>;
+		return (
+			<div id='text'>
+				<button onClick={this.all.bind(this)}>門市</button>
+				<button onClick={this.nor.bind(this)}>北部</button>
+				<button onClick={this.cen.bind(this)}>中部</button>
+				<button onClick={this.sou.bind(this)}>南部</button>
+				<button onClick={this.est.bind(this)}>東部</button>
+				<button onClick={this.copy.bind(this)}>複製HTML</button>
+			</div>
+		);
 	}
 }

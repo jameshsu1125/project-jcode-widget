@@ -6,6 +6,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const { UnusedFilesWebpackPlugin } = require('unused-files-webpack-plugin');
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (env) => {
 	const config = {
@@ -16,7 +17,7 @@ module.exports = (env) => {
 		module: {
 			rules: [
 				{ test: /\.(js|jsx)$/, exclude: /node_modules/, use: 'babel-loader?retainLines=true' },
-				{ test: /\.s[ac]ss$/i, use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'] },
+				{ test: /\.s[ac]ss$/i, use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'] },
 				{ test: /\.css$/, use: ['style-loader', 'css-loader', 'postcss-loader'] },
 				{ test: /\.(png|jpg|gif|svg)$/, use: [{ loader: 'file-loader', options: { name: 'bundle/img/[path][name].[ext]', context: 'src' } }] },
 				{ test: /\.(ogv|mp4)$/, use: [{ loader: 'file-loader', options: { name: 'bundle/vid/[path][name].[ext]', context: 'src' } }] },
@@ -35,6 +36,9 @@ module.exports = (env) => {
 			new webpack.HotModuleReplacementPlugin(),
 			new webpack.DefinePlugin({
 				__REACT_DEVTOOLS_GLOBAL_HOOK__: '({ isDisabled: true })',
+			}),
+			new MiniCssExtractPlugin({
+				filename: './css/[name].css',
 			}),
 		],
 		optimization: {
